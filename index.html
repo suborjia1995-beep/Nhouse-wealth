@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>專屬房產活化與資產配置方案｜家族財富傳承試算</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+          },
+          colors: {
+            cream: {
+              50: '#faf8f5',
+              100: '#f5f0ea',
+              200: '#ece3d8',
+              300: '#dfd2c0',
+            },
+            warm: {
+              dark: '#1c1917',
+              wood: '#292524',
+              stone: '#44403c',
+              muted: '#78716c',
+            },
+            forest: {
+              50: '#f2f7f4',
+              100: '#e1ede5',
+              700: '#1b4d3e',
+              800: '#153e32',
+              900: '#0f2c23',
+              950: '#071813',
+            },
+            gold: {
+              50: '#fbf8ee',
+              100: '#f5edd2',
+              500: '#c89d3c',
+              600: '#b0852a',
+              700: '#8e681c',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+      background: linear-gradient(135deg, #faf7f2 0%, #f4eee6 50%, #f8f5f0 100%);
+      background-attachment: fixed;
+      color: #292524;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .card-shadow {
+      box-shadow: 0 10px 30px -10px rgba(68, 64, 60, 0.08), 0 4px 6px -2px rgba(68, 64, 60, 0.02);
+    }
+    .hero-shadow {
+      box-shadow: 0 25px 50px -12px rgba(15, 44, 35, 0.25);
+    }
+    .custom-input {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .custom-input:focus {
+      background-color: #ffffff;
+      border-color: #1b4d3e;
+      box-shadow: 0 0 0 4px rgba(27, 77, 62, 0.08);
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; font-size: 11pt; }
+      .card-shadow, .hero-shadow { box-shadow: none !important; }
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen py-8 sm:py-12 px-3 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto space-y-8 sm:space-y-10">
+    
+    <!-- 頂部溫暖人文調性的 Header -->
+    <header class="relative overflow-hidden bg-gradient-to-br from-forest-900 via-forest-800 to-warm-dark rounded-[2.5rem] hero-shadow p-8 sm:p-12 text-white border border-forest-700/40">
+      <!-- 溫暖氛圍光暈 -->
+      <div class="absolute -right-16 -top-16 w-96 h-96 bg-gold-500/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-16 -bottom-16 w-96 h-96 bg-forest-700/30 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div class="space-y-3 max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-gold-100 text-xs font-medium tracking-wide">
+            <i class="fa-solid fa-seedling text-gold-500"></i>
+            <span>讓家中的磚瓦，轉化為守護未來的永續現金流</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            讓房子為您工作 <span class="text-gold-500 font-serif italic text-3xl sm:text-4xl">Living Wealth</span>
+          </h1>
+          <p class="text-emerald-100/80 text-sm sm:text-base font-normal leading-relaxed pt-1">
+            透過專業房產活化與雙層保單資產配置，既保留起家厝未來的增值紅利，更在不增加額外負擔的前提下，為家庭打造源源不絕的月月被動收入。
+          </p>
+        </div>
+
+        <!-- 諮詢人與客製化標籤小卡 -->
+        <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/15 text-xs space-y-3 shrink-0">
+          <div class="flex items-center justify-between gap-4">
+            <span class="text-emerald-100/70 font-medium">規劃案專屬貴賓：</span>
+            <input type="text" id="clientNameInput" value="尊榮貴賓" class="bg-white/20 hover:bg-white/30 text-white font-bold px-2.5 py-1 rounded-lg text-right text-xs outline-none focus:ring-1 focus:ring-gold-500 w-28 transition" placeholder="輸入姓名">
+          </div>
+          <div class="flex items-center justify-between gap-4 pt-2 border-t border-white/10 text-[11px] text-emerald-100/60">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-arrows-rotate text-gold-500"></i> MoneyDJ 行情同步</span>
+            <span id="updateTimeText" class="font-mono text-white/90">2026-08-30 12:00</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 基金即時行情監測小閣樓 (暖木質調卡片) -->
+    <section class="space-y-3">
+      <div class="flex items-center justify-between px-1">
+        <h2 class="text-xs sm:text-sm font-bold text-warm-stone tracking-wide flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-forest-700"></span>
+          精選全球多元收益旗艦標的行情（每日中午12:00自動更新）
+        </h2>
+        <span class="text-[11px] text-warm-muted">單位：美元 (USD)</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <!-- 基金 1 -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-5 card-shadow border border-warm-200/60 hover:border-forest-700/40 transition-all duration-300">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider text-forest-700 uppercase bg-forest-50 px-2 py-0.5 rounded-md">穩定月收</span>
+              <h3 class="font-bold text-sm sm:text-base text-warm-dark mt-1">安聯收益成長基金-AM</h3>
+              <p class="text-[11px] text-warm-muted">美股成長股 ✕ 收益債 ✕ 可轉債平衡配置</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 bg-cream-50 p-3 rounded-xl border border-cream-200/50 text-center">
+            <div>
+              <span class="text-[10px] text-warm-muted block">當日淨值</span>
+              <span class="text-xs sm:text-sm font-bold text-warm-stone font-mono mt-0.5 block" id="card_nav1">$8.585</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-warm-muted block">每單位配息</span>
+              <span class="text-xs sm:text-sm font-bold text-warm-stone font-mono mt-0.5 block" id="card_div1">$0.0538</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-forest-700 block font-semibold">年化配息率</span>
+              <span class="text-xs sm:text-sm font-black text-forest-700 font-mono mt-0.5 block" id="card_yield1">7.52%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 基金 2 -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-5 card-shadow border border-warm-200/60 hover:border-gold-500/50 transition-all duration-300">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider text-gold-700 uppercase bg-gold-50 px-2 py-0.5 rounded-md">優化收益</span>
+              <h3 class="font-bold text-sm sm:text-base text-warm-dark mt-1">瀚亞多重收益組合-B</h3>
+              <p class="text-[11px] text-warm-muted">跨資產多元佈局・極致現金流優化</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 bg-cream-50 p-3 rounded-xl border border-cream-200/50 text-center">
+            <div>
+              <span class="text-[10px] text-warm-muted block">當日淨值</span>
+              <span class="text-xs sm:text-sm font-bold text-warm-stone font-mono mt-0.5 block" id="card_nav2">$8.440</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-warm-muted block">每單位配息</span>
+              <span class="text-xs sm:text-sm font-bold text-warm-stone font-mono mt-0.5 block" id="card_div2">$0.0700</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-forest-700 block font-semibold">年化配息率</span>
+              <span class="text-xs sm:text-sm font-black text-forest-700 font-mono mt-0.5 block" id="card_yield2">9.95%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 基金 3 -->
+        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-5 card-shadow border border-warm-200/60 hover:border-amber-500/50 transition-all duration-300">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <span class="text-[10px] font-bold tracking-wider text-amber-800 uppercase bg-amber-50 px-2 py-0.5 rounded-md">強勢成長</span>
+              <h3 class="font-bold text-sm sm:text-base text-warm-dark mt-1">聯博美國成長AP級別</h3>
+              <p class="text-[11px] text-warm-muted">頂級科技龍頭股＋總報酬月配息機制</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 bg-cream-50 p-3 rounded-xl border border-cream-200/50 text-center">
+            <div>
+              <span class="text-[10px] text-warm-muted block">當日淨值</span>
+              <span class="text-xs sm:text-sm font-bold text-warm-stone font-mono mt-0.5 block" id="card_nav3">$73.48</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-warm-muted block">每單位配息</span>
+              <span class="text-xs sm:text-sm font-bold text-warm-stone font-mono mt-0.5 block" id="card_div3">$0.8322</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-forest-700 block font-semibold">年化配息率</span>
+              <span class="text-xs sm:text-sm font-black text-forest-700 font-mono mt-0.5 block" id="card_yield3">13.59%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 主區塊：參數設定 vs. 現金流看板 -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- 左側：輸入與配置區域 (7 Cols) -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- 步驟 1：房貸小幫手 -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 card-shadow border border-warm-200/80 space-y-5">
+          <div class="flex items-center justify-between border-b border-cream-100 pb-4">
+            <div class="flex items-center space-x-3">
+              <span class="w-8 h-8 rounded-full bg-forest-700 text-gold-100 flex items-center justify-center font-bold text-xs shadow-md">1</span>
+              <div>
+                <h3 class="text-base sm:text-lg font-bold text-warm-dark">您的房產增貸設定</h3>
+                <p class="text-xs text-warm-muted">依目前銀行利率與條件輕鬆試算</p>
+              </div>
+            </div>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-cream-100 text-warm-stone">房貸試算</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-warm-stone mb-1.5">預計增貸金額</label>
+              <div class="relative">
+                <input type="number" id="loanAmount" value="1000" class="custom-input w-full pl-4 pr-12 py-3 bg-cream-50 border border-warm-200 rounded-2xl font-bold text-warm-dark text-sm">
+                <span class="absolute right-4 top-3 text-xs font-bold text-warm-muted">萬元</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-warm-stone mb-1.5">貸款還款年期</label>
+              <div class="relative">
+                <input type="number" id="loanYears" value="30" class="custom-input w-full pl-4 pr-10 py-3 bg-cream-50 border border-warm-200 rounded-2xl font-semibold text-warm-dark text-sm">
+                <span class="absolute right-4 top-3 text-xs font-bold text-warm-muted">年</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-warm-stone mb-1.5">房貸年利率</label>
+              <div class="relative">
+                <input type="number" step="0.01" id="loanRate" value="2.35" class="custom-input w-full pl-4 pr-10 py-3 bg-cream-50 border border-warm-200 rounded-2xl font-semibold text-warm-dark text-sm">
+                <span class="absolute right-4 top-3 text-xs font-bold text-warm-muted">%</span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-warm-stone mb-1.5">寬限期 (只繳利息)</label>
+              <div class="relative">
+                <input type="number" id="gracePeriod" value="3" class="custom-input w-full pl-4 pr-10 py-3 bg-cream-50 border border-warm-200 rounded-2xl font-semibold text-warm-dark text-sm">
+                <span class="absolute right-4 top-3 text-xs font-bold text-warm-muted">年</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-cream-50/80 border border-cream-200/60 text-xs">
+            <div>
+              <span class="text-warm-muted font-medium block">寬限期每月還款 (純繳息)：</span>
+              <span class="font-black text-forest-700 text-sm mt-0.5 block font-mono" id="gracePayment">NT$ 0</span>
+            </div>
+            <div>
+              <span class="text-warm-muted font-medium block">寬限期後每月還款 (本息攤還)：</span>
+              <span class="font-black text-rose-700 text-sm mt-0.5 block font-mono" id="regularPayment">NT$ 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 步驟 2：第一層配置 -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 card-shadow border border-warm-200/80 space-y-5">
+          <div class="flex items-center justify-between border-b border-cream-100 pb-4">
+            <div class="flex items-center space-x-3">
+              <span class="w-8 h-8 rounded-full bg-forest-700 text-gold-100 flex items-center justify-center font-bold text-xs shadow-md">2</span>
+              <div>
+                <h3 class="text-base sm:text-lg font-bold text-warm-dark">第一層投資型保單標的配置</h3>
+                <p class="text-xs text-warm-muted">將增貸款項投入優質基金，建立被動配息核心</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] text-warm-muted block">首層本金</span>
+              <span class="text-xs font-black text-forest-800 bg-forest-50 px-3 py-1 rounded-full border border-forest-100"><b id="tier1Capital">1,000</b> 萬元</span>
+            </div>
+          </div>
+
+          <div class="space-y-3.5">
+            <!-- 標的 1 -->
+            <div class="p-4 rounded-2xl bg-cream-50/50 border border-warm-200/60 hover:bg-white hover:border-forest-700/40 transition space-y-2">
+              <div class="flex justify-between items-center text-xs font-bold text-warm-dark">
+                <span>1. 安聯收益成長基金-AM (美元)</span>
+                <span class="text-[10px] text-warm-muted">多元收益平衡</span>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="text-[11px] font-medium text-warm-muted mb-1 block">投資比例 (%)</label>
+                  <input type="number" id="t1_ratio1" value="40" class="custom-input w-full px-3 py-2 bg-white border border-warm-200 rounded-xl text-xs font-bold text-warm-dark tier1-ratio">
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-warm-muted mb-1 block">年化配息率 (%)</label>
+                  <input type="number" step="0.01" id="t1_yield1" value="7.52" class="custom-input w-full px-3 py-2 bg-white border border-warm-200 rounded-xl text-xs font-black text-forest-700">
+                </div>
+              </div>
+            </div>
+
+            <!-- 標的 2 -->
+            <div class="p-4 rounded-2xl bg-cream-50/50 border border-warm-200/60 hover:bg-white hover:border-gold-500/40 transition space-y-2">
+              <div class="flex justify-between items-center text-xs font-bold text-warm-dark">
+                <span>2. 瀚亞多重收益優化組合基金B (美元)</span>
+                <span class="text-[10px] text-warm-muted">高息防禦配置</span>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="text-[11px] font-medium text-warm-muted mb-1 block">投資比例 (%)</label>
+                  <input type="number" id="t1_ratio2" value="30" class="custom-input w-full px-3 py-2 bg-white border border-warm-200 rounded-xl text-xs font-bold text-warm-dark tier1-ratio">
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-warm-muted mb-1 block">年化配息率 (%)</label>
+                  <input type="number" step="0.01" id="t1_yield2" value="9.95" class="custom-input w-full px-3 py-2 bg-white border border-warm-200 rounded-xl text-xs font-black text-forest-700">
+                </div>
+              </div>
+            </div>
+
+            <!-- 標的 3 -->
+            <div class="p-4 rounded-2xl bg-cream-50/50 border border-warm-200/60 hover:bg-white hover:border-amber-500/40 transition space-y-2">
+              <div class="flex justify-between items-center text-xs font-bold text-warm-dark">
+                <span>3. 聯博美國成長AP (總報酬月配/美元)</span>
+                <span class="text-[10px] text-warm-muted">美股成長獲利</span>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="text-[11px] font-medium text-warm-muted mb-1 block">投資比例 (%)</label>
+                  <input type="number" id="t1_ratio3" value="30" class="custom-input w-full px-3 py-2 bg-white border border-warm-200 rounded-xl text-xs font-bold text-warm-dark tier1-ratio">
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-warm-muted mb-1 block">年化配息率 (%)</label>
+                  <input type="number" step="0.01" id="t1_yield3" value="13.59" class="custom-input w-full px-3 py-2 bg-white border border-warm-200 rounded-xl text-xs font-black text-forest-700">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center text-xs pt-1">
+            <span class="text-warm-muted">年化配息率公式：(每單位配息 × 12 / 當日淨值)</span>
+            <div class="font-medium">配置總和：<span id="tier1TotalRatio" class="font-bold text-forest-700">100%</span></div>
+          </div>
+        </div>
+
+        <!-- 步驟 3：保單質借 -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 card-shadow border border-warm-200/80 space-y-5">
+          <div class="flex items-center justify-between border-b border-cream-100 pb-4">
+            <div class="flex items-center space-x-3">
+              <span class="w-8 h-8 rounded-full bg-gold-600 text-white flex items-center justify-center font-bold text-xs shadow-md">3</span>
+              <div>
+                <h3 class="text-base sm:text-lg font-bold text-warm-dark">保單質押再投資 (二度活化)</h3>
+                <p class="text-xs text-warm-muted">活用保單保單價值準備金，擴大每月的淨現金流利差</p>
+              </div>
+            </div>
+            <label class="inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="enableLeverage" class="sr-only peer" checked>
+              <div class="w-12 h-6 bg-cream-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-warm-200 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-forest-700 shadow-inner"></div>
+            </label>
+          </div>
+
+          <div id="leverageSection" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-warm-stone mb-1.5">保單質借成數</label>
+                <div class="relative">
+                  <input type="number" id="pledgeRatio" value="60" class="custom-input w-full pl-4 pr-10 py-3 bg-cream-50 border border-warm-200 rounded-2xl font-bold text-warm-dark text-sm">
+                  <span class="absolute right-4 top-3 text-xs font-bold text-warm-muted">%</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-warm-stone mb-1.5">保險公司借款年利率</label>
+                <div class="relative">
+                  <input type="number" step="0.01" id="pledgeRate" value="4.0" class="custom-input w-full pl-4 pr-10 py-3 bg-cream-50 border border-warm-200 rounded-2xl font-semibold text-warm-dark text-sm">
+                  <span class="absolute right-4 top-3 text-xs font-bold text-warm-muted">%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-gold-50/60 border border-gold-100 flex flex-col sm:flex-row justify-between items-center text-xs gap-2">
+              <span class="text-warm-stone">質借取得再投資本金：<b id="tier2Capital" class="text-gold-700 font-extrabold text-sm font-mono">600</b> 萬元</span>
+              <span class="text-warm-stone">每月質借利息支出：<b id="pledgeMonthlyInterest" class="text-rose-700 font-extrabold text-sm font-mono">NT$ 20,000</b></span>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-warm-stone mb-2">第二層保單標的配置比例 (%)</label>
+              <div class="grid grid-cols-3 gap-2 text-xs">
+                <div class="p-3 rounded-xl bg-cream-50 border border-warm-200/60 text-center">
+                  <span class="text-[11px] font-semibold text-warm-muted block truncate">安聯收益成長</span>
+                  <input type="number" id="t2_ratio1" value="40" class="custom-input w-full mt-1 px-2 py-1.5 bg-white border border-warm-200 rounded-lg text-xs font-bold text-center tier2-ratio">
+                </div>
+                <div class="p-3 rounded-xl bg-cream-50 border border-warm-200/60 text-center">
+                  <span class="text-[11px] font-semibold text-warm-muted block truncate">瀚亞多重收益</span>
+                  <input type="number" id="t2_ratio2" value="30" class="custom-input w-full mt-1 px-2 py-1.5 bg-white border border-warm-200 rounded-lg text-xs font-bold text-center tier2-ratio">
+                </div>
+                <div class="p-3 rounded-xl bg-cream-50 border border-warm-200/60 text-center">
+                  <span class="text-[11px] font-semibold text-warm-muted block truncate">聯博美國成長</span>
+                  <input type="number" id="t2_ratio3" value="30" class="custom-input w-full mt-1 px-2 py-1.5 bg-white border border-warm-200 rounded-lg text-xs font-bold text-center tier2-ratio">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 右側：溫暖優雅的即時現金流看板 (5 Cols Sticky) -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <div class="bg-white rounded-[2rem] p-7 card-shadow border border-warm-200/80 sticky top-6 space-y-6">
+          
+          <div class="border-b border-cream-100 pb-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-black text-warm-dark tracking-tight flex items-center gap-2">
+                <i class="fa-solid fa-coins text-gold-500"></i> 每月現金流全景
+              </h3>
+              <span class="text-[10px] font-bold bg-forest-50 text-forest-700 px-2.5 py-1 rounded-full border border-forest-100">實時結算</span>
+            </div>
+            <p class="text-xs text-warm-muted mt-0.5">清晰掌握每月的流入、支出與口袋淨額</p>
+          </div>
+
+          <!-- 正向現金流 (流入) -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between text-xs font-bold text-forest-800">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-forest-700"></span> 每月配息總收入
+              </span>
+              <span id="outTotalIncome" class="font-extrabold font-mono text-forest-800 text-sm">+ NT$ 0</span>
+            </div>
+            
+            <div class="bg-forest-50/60 rounded-2xl p-4 space-y-2 text-xs border border-forest-100/80">
+              <div class="flex justify-between items-center text-warm-stone">
+                <span>1. 第一層保單每月配息：</span>
+                <span class="font-bold text-forest-700 font-mono">+ <span id="outTier1Dividend">0</span> 元</span>
+              </div>
+              <div class="flex justify-between items-center text-warm-stone" id="rowTier2Dividend">
+                <span>2. 質借保單每月配息：</span>
+                <span class="font-bold text-forest-700 font-mono">+ <span id="outTier2Dividend">0</span> 元</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 負向現金流 (支出) -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between text-xs font-bold text-rose-800">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-rose-600"></span> 每月還款總支出
+              </span>
+              <span id="outTotalExpense" class="font-extrabold font-mono text-rose-800 text-sm">- NT$ 0</span>
+            </div>
+            
+            <div class="bg-rose-50/50 rounded-2xl p-4 space-y-2 text-xs border border-rose-100/80">
+              <div class="flex justify-between items-center text-warm-stone">
+                <span>1. 房貸月付 (本息攤還)：</span>
+                <span class="font-bold text-rose-700 font-mono">- <span id="outLoanPayment">0</span> 元</span>
+              </div>
+              <div class="flex justify-between items-center text-warm-stone" id="rowPledgeInterest">
+                <span>2. 保單質借每月利息：</span>
+                <span class="font-bold text-rose-700 font-mono">- <span id="outPledgeInterest">0</span> 元</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 最終淨現金流成果 (高雅深綠金絲絨風格卡片) -->
+          <div class="relative overflow-hidden bg-gradient-to-br from-forest-950 via-forest-900 to-warm-dark text-white rounded-2xl p-6 shadow-xl border border-forest-700/50">
+            <div class="flex items-center justify-between text-xs text-emerald-100/70">
+              <span>每月實質放入口袋的淨現金</span>
+              <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-white/10 text-gold-100 font-medium">扣除本息後</span>
+            </div>
+            
+            <div class="text-3xl sm:text-4xl font-black mt-2 tracking-tight font-mono text-gold-500 drop-shadow-sm" id="netCashflowDisplay">
+              + NT$ 0
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-forest-800/80 grid grid-cols-2 gap-2 text-xs">
+              <div class="bg-white/5 p-3 rounded-xl">
+                <span class="text-emerald-100/60 text-[10px] block">全年累積淨現金</span>
+                <span class="font-bold text-white text-xs sm:text-sm font-mono mt-0.5 block" id="annualNetCashflow">NT$ 0</span>
+              </div>
+              <div class="bg-white/5 p-3 rounded-xl">
+                <span class="text-gold-500 text-[10px] block font-medium">寬限期每月淨流</span>
+                <span class="font-bold text-gold-100 text-xs sm:text-sm font-mono mt-0.5 block" id="graceNetCashflow">+ NT$ 0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 bg-cream-50 rounded-xl border border-cream-200/60 text-[11px] text-warm-muted leading-relaxed text-center">
+            💡 <b>溫馨提醒：</b>配息直接幫忙付清房貸本金＋利息，您不僅不用自掏腰包，每個月還有多餘零用金！
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 🌟 專屬客戶結論報告：高雅人文生活提案視覺 (溫暖雜誌風) -->
+    <section class="bg-white rounded-[2.5rem] card-shadow border border-warm-200/80 p-6 sm:p-12 space-y-8">
+      
+      <!-- 報告 Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cream-100 pb-6">
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-50 border border-forest-100 text-forest-800 text-xs font-bold tracking-wide">
+            <i class="fa-solid fa-file-invoice-dollar text-gold-500"></i>
+            <span>為 <span id="reportClientName" class="underline decoration-gold-500 underline-offset-2">尊榮貴賓</span> 量身精算的資產報告</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-warm-dark tracking-tight">
+            房產活化價值評估與長線套利結論
+          </h2>
+          <p class="text-xs sm:text-sm text-warm-muted font-normal">
+            以貸款年期 <span class="font-extrabold text-forest-800 font-mono rep-years-text">30</span> 年為週期・深度剖析「傳統持有」與「資產活化」的財富分水嶺
+          </p>
+        </div>
+
+        <button onclick="window.print()" class="no-print self-start sm:self-center inline-flex items-center gap-2 bg-forest-800 hover:bg-forest-900 text-gold-100 text-xs font-bold px-6 py-3.5 rounded-2xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]">
+          <i class="fa-solid fa-print"></i> 列印 / 匯出 PDF 提案書
+        </button>
+      </div>
+
+      <!-- 兩種決策對比圖表 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- 情境 A：傳統保守不動 -->
+        <div class="rounded-3xl border border-warm-200 bg-cream-50/40 p-6 sm:p-8 space-y-5 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-3 py-1 bg-cream-200/80 text-warm-stone rounded-xl">方案 A</span>
+              <span class="text-xs text-warm-muted font-medium">傳統不動產思維</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-warm-dark">房子靜止放著・不做任何增貸活化</h3>
+              <p class="text-xs text-warm-muted mt-1">資產沉睡在水泥牆壁裡，無法轉化為生活實質現金流</p>
+            </div>
+
+            <div class="space-y-3 text-xs text-warm-stone pt-2">
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold"><i class="fa-solid fa-xmark"></i></div>
+                <span><b>死錢無法變現：</b>房價就算上漲數百萬，沒賣掉之前都只是紙上富貴，無法改善日常生活品質。</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold"><i class="fa-solid fa-xmark"></i></div>
+                <span><b>零被動月收入：</b>每月無任何配息注入，家庭所有日常開銷與通膨壓力仍需由自身主動收入辛苦承擔。</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold"><i class="fa-solid fa-xmark"></i></div>
+                <span><b>錯失複利時機：</b>白白錯失全球頂級優質收益資產數十年的複利增長與高額配息金流機會。</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-warm-200 text-center shadow-sm">
+            <span class="text-xs text-warm-muted block font-medium"><span class="rep-years-text font-mono font-bold">30</span> 年後的資產結局：</span>
+            <div class="text-base sm:text-lg font-black text-warm-dark mt-1">
+              依然只有【原本的那間房子】
+            </div>
+            <span class="text-[11px] text-warm-muted block mt-1">期間累積創造額外現金：<b class="text-warm-stone font-mono">0 元</b></span>
+          </div>
+        </div>
+
+        <!-- 情境 B：資產活化與保單質借 -->
+        <div class="rounded-3xl border-2 border-forest-700 bg-gradient-to-b from-forest-50/40 via-white to-gold-50/30 p-6 sm:p-8 space-y-5 flex flex-col justify-between relative shadow-lg shadow-forest-900/5 overflow-hidden">
+          <div class="absolute top-0 right-0 bg-forest-800 text-gold-100 text-[10px] font-extrabold px-4 py-1.5 rounded-bl-2xl tracking-wider shadow-sm">
+            ★ 推薦最佳傳承方案
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-3 py-1 bg-forest-700 text-white rounded-xl shadow-sm">方案 B</span>
+              <span class="text-xs font-bold text-forest-800">資產活化 ✕ 雙層保單質押</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-forest-950">啟動房貸轉增貸・配置月配息保單</h3>
+              <p class="text-xs text-forest-800/80 mt-1">以息養貸、自動還本，打造家庭永續被動收入引擎</p>
+            </div>
+
+            <div class="space-y-3 text-xs text-warm-stone pt-2">
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold"><i class="fa-solid fa-check"></i></div>
+                <span><b>房產產權 100% 完整保留：</b>房子依然是您的，未來房價上漲的增值收益完全由您與家人享有。</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold"><i class="fa-solid fa-check"></i></div>
+                <span><b>以息養貸還有找：</b>每個月領取的配息足夠支付房貸本息與質借利息，每月還額外淨流入被動生活金。</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded-full bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold"><i class="fa-solid fa-check"></i></div>
+                <span><b>資產翻倍成長：</b>房貸全數還清後，無痛多擁有一座龐大的生息保單資產與終身月退俸。</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-r from-forest-900 to-warm-dark text-white p-5 rounded-2xl shadow-md text-center">
+            <span class="text-xs text-emerald-100/70 block font-medium"><span class="rep-years-text font-mono font-bold">30</span> 年後的驚人財富收穫：</span>
+            <div class="text-base sm:text-lg font-black text-gold-500 mt-1">
+              【原本的房子】＋【持續生息的保單資產】
+            </div>
+            <div class="mt-2 pt-2 border-t border-forest-800/80 flex flex-col sm:flex-row items-center justify-center gap-1 text-xs text-emerald-100/90 font-medium">
+              <span class="shrink-0">期間累積實質總套利：</span>
+              <span class="text-gold-100 font-extrabold font-mono text-sm sm:text-base whitespace-nowrap" id="repTotalArbitrage">NT$ 0</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 三大關鍵數據核心指標 (暖金質調) -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        
+        <div class="bg-cream-50 border border-cream-200 rounded-2xl p-5 text-center">
+          <span class="text-xs text-warm-muted font-medium block">總管理保單資產規模</span>
+          <div class="text-2xl sm:text-3xl font-black text-forest-800 font-mono mt-1.5" id="repTotalAssets">
+            1,600 萬元
+          </div>
+          <span class="text-[11px] text-warm-muted mt-1 block">房產增貸 + 保單質借合計</span>
+        </div>
+
+        <div class="bg-forest-50/70 border border-forest-100 rounded-2xl p-4 sm:p-5 text-center flex flex-col justify-between">
+          <span class="text-xs text-forest-800 font-medium block whitespace-nowrap"><span class="rep-years-text font-mono font-bold">30</span> 年累積總套利淨收益</span>
+          <div class="text-xl sm:text-2xl xl:text-3xl font-black text-forest-800 font-mono my-1.5 whitespace-nowrap tracking-tight" id="repArbitrageAmount">
+            NT$ 0 萬
+          </div>
+          <span class="text-[11px] text-forest-700 block whitespace-nowrap">已扣除全額房貸本息與借款利息</span>
+        </div>
+
+        <div class="bg-gold-50/70 border border-gold-100 rounded-2xl p-4 sm:p-5 text-center flex flex-col justify-between">
+          <span class="text-xs text-gold-800 font-medium block whitespace-nowrap">房貸結清後・終身被動月配息</span>
+          <div class="text-xl sm:text-2xl xl:text-3xl font-black text-gold-600 font-mono my-1.5 whitespace-nowrap tracking-tight" id="repPostMortgageMonthly">
+            + NT$ 0 /月
+          </div>
+          <span class="text-[11px] text-gold-700/80 block whitespace-nowrap">房貸歸零後的純月被動金流</span>
+        </div>
+
+      </div>
+
+      <!-- 顧問專業溫馨總結語 -->
+      <div class="bg-gradient-to-r from-forest-900 to-warm-dark text-emerald-100/90 rounded-2xl p-7 text-xs sm:text-sm leading-relaxed border-l-4 border-gold-500 space-y-3">
+        <div class="font-bold text-white text-sm sm:text-base flex items-center gap-2">
+          <i class="fa-solid fa-feather text-gold-500"></i> 理財顧問的心底話：
+        </div>
+        <p class="text-emerald-100/80">
+          「資產擺在水泥牆裡是不會主動生錢的。」透過本次房產活化配置，您不僅完全保留原房屋的居住溫馨與未來增值紅利，更巧妙運用金融工具的低利槓桿，打造<b>『月月領息、以息養貸、期滿得資產』</b>的永續現金流系統。在 <span class="text-gold-500 font-bold font-mono rep-years-text">30</span> 年後房貸清償之際，您為家人留下的，將是一座源源不絕的家族傳承金礦！
+        </p>
+      </div>
+
+    </section>
+
+  </div>
+
+  <script>
+    // 監聽貴賓姓名更新
+    const nameInput = document.getElementById('clientNameInput');
+    const reportName = document.getElementById('reportClientName');
+    nameInput.addEventListener('input', () => {
+      reportName.textContent = nameInput.value || '尊榮貴賓';
+    });
+
+    // 試算核心
+    function calculate() {
+      // 1. 房貸計算
+      const loanAmount = (parseFloat(document.getElementById('loanAmount').value) || 0) * 10000;
+      const loanYears = parseFloat(document.getElementById('loanYears').value) || 1;
+      const loanRate = (parseFloat(document.getElementById('loanRate').value) || 0) / 100;
+      const graceYears = parseFloat(document.getElementById('gracePeriod').value) || 0;
+
+      const monthlyRate = loanRate / 12;
+      const totalMonths = loanYears * 12;
+      const graceMonths = graceYears * 12;
+      const amortMonths = totalMonths - graceMonths;
+
+      // 寬限期月付（純息）
+      const graceMonthlyPay = Math.round(loanAmount * monthlyRate);
+
+      // 寬限期後本息均攤
+      let regularMonthlyPay = 0;
+      if (amortMonths > 0) {
+        if (monthlyRate === 0) {
+          regularMonthlyPay = Math.round(loanAmount / amortMonths);
+        } else {
+          regularMonthlyPay = Math.round(
+            loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, amortMonths)) / (Math.pow(1 + monthlyRate, amortMonths) - 1)
+          );
+        }
+      }
+
+      document.getElementById('gracePayment').textContent = `NT$ ${graceMonthlyPay.toLocaleString()}`;
+      document.getElementById('regularPayment').textContent = `NT$ ${regularMonthlyPay.toLocaleString()}`;
+
+      // 2. 第一層保單配息
+      document.getElementById('tier1Capital').textContent = (loanAmount / 10000).toLocaleString();
+      const t1_r1 = (parseFloat(document.getElementById('t1_ratio1').value) || 0) / 100;
+      const t1_r2 = (parseFloat(document.getElementById('t1_ratio2').value) || 0) / 100;
+      const t1_r3 = (parseFloat(document.getElementById('t1_ratio3').value) || 0) / 100;
+      
+      const t1_yield1 = (parseFloat(document.getElementById('t1_yield1').value) || 0) / 100;
+      const t1_yield2 = (parseFloat(document.getElementById('t1_yield2').value) || 0) / 100;
+      const t1_yield3 = (parseFloat(document.getElementById('t1_yield3').value) || 0) / 100;
+
+      const tier1TotalRatioVal = Math.round((t1_r1 + t1_r2 + t1_r3) * 100);
+      document.getElementById('tier1TotalRatio').textContent = `${tier1TotalRatioVal}%`;
+      document.getElementById('tier1TotalRatio').className = tier1TotalRatioVal === 100 ? 'font-bold text-forest-700' : 'font-bold text-rose-600';
+
+      const t1_weighted_yield = (t1_r1 * t1_yield1) + (t1_r2 * t1_yield2) + (t1_r3 * t1_yield3);
+      const tier1MonthlyDividend = Math.round((loanAmount * t1_weighted_yield) / 12);
+
+      // 3. 保單質押計算
+      const enableLeverage = document.getElementById('enableLeverage').checked;
+      document.getElementById('leverageSection').style.display = enableLeverage ? 'block' : 'none';
+      document.getElementById('rowTier2Dividend').style.display = enableLeverage ? 'flex' : 'none';
+      document.getElementById('rowPledgeInterest').style.display = enableLeverage ? 'flex' : 'none';
+
+      let pledgeAmount = 0;
+      let pledgeMonthlyInterest = 0;
+      let tier2MonthlyDividend = 0;
+
+      if (enableLeverage) {
+        const pledgeRatio = (parseFloat(document.getElementById('pledgeRatio').value) || 0) / 100;
+        const pledgeRate = (parseFloat(document.getElementById('pledgeRate').value) || 0) / 100;
+        
+        pledgeAmount = loanAmount * pledgeRatio;
+        pledgeMonthlyInterest = Math.round((pledgeAmount * pledgeRate) / 12);
+
+        document.getElementById('tier2Capital').textContent = (pledgeAmount / 10000).toLocaleString();
+        document.getElementById('pledgeMonthlyInterest').textContent = `NT$ ${pledgeMonthlyInterest.toLocaleString()}`;
+
+        const t2_r1 = (parseFloat(document.getElementById('t2_ratio1').value) || 0) / 100;
+        const t2_r2 = (parseFloat(document.getElementById('t2_ratio2').value) || 0) / 100;
+        const t2_r3 = (parseFloat(document.getElementById('t2_ratio3').value) || 0) / 100;
+
+        const t2_weighted_yield = (t2_r1 * t1_yield1) + (t2_r2 * t1_yield2) + (t2_r3 * t1_yield3);
+        tier2MonthlyDividend = Math.round((pledgeAmount * t2_weighted_yield) / 12);
+      }
+
+      // 4. 現金流總匯整
+      const totalMonthlyIncome = tier1MonthlyDividend + tier2MonthlyDividend;
+      const totalMonthlyExpense = regularMonthlyPay + pledgeMonthlyInterest;
+      const graceMonthlyExpense = graceMonthlyPay + pledgeMonthlyInterest;
+
+      const netMonthlyCashflow = totalMonthlyIncome - totalMonthlyExpense;
+      const graceNetCashflow = totalMonthlyIncome - graceMonthlyExpense;
+
+      // 渲染即時儀表板
+      document.getElementById('outTier1Dividend').textContent = tier1MonthlyDividend.toLocaleString();
+      document.getElementById('outTier2Dividend').textContent = tier2MonthlyDividend.toLocaleString();
+      document.getElementById('outTotalIncome').textContent = `+ NT$ ${totalMonthlyIncome.toLocaleString()}`;
+
+      document.getElementById('outLoanPayment').textContent = regularMonthlyPay.toLocaleString();
+      document.getElementById('outPledgeInterest').textContent = pledgeMonthlyInterest.toLocaleString();
+      document.getElementById('outTotalExpense').textContent = `- NT$ ${totalMonthlyExpense.toLocaleString()}`;
+
+      const displayEl = document.getElementById('netCashflowDisplay');
+      if (netMonthlyCashflow >= 0) {
+        displayEl.textContent = `+ NT$ ${netMonthlyCashflow.toLocaleString()}`;
+        displayEl.className = "text-3xl sm:text-4xl font-black mt-2 tracking-tight font-mono text-gold-500 drop-shadow-sm";
+      } else {
+        displayEl.textContent = `- NT$ ${Math.abs(netMonthlyCashflow).toLocaleString()}`;
+        displayEl.className = "text-3xl sm:text-4xl font-black mt-2 tracking-tight font-mono text-rose-400 drop-shadow-sm";
+      }
+
+      document.getElementById('annualNetCashflow').textContent = `NT$ ${(netMonthlyCashflow * 12).toLocaleString()}`;
+      document.getElementById('graceNetCashflow').textContent = `+ NT$ ${graceNetCashflow.toLocaleString()}`;
+
+      // 5. 計算並渲染結論報告
+      document.querySelectorAll('.rep-years-text').forEach(el => {
+        el.textContent = loanYears;
+      });
+
+      const totalPortfolioAssets = (loanAmount + pledgeAmount) / 10000;
+      document.getElementById('repTotalAssets').textContent = `${totalPortfolioAssets.toLocaleString()} 萬元`;
+
+      const totalArbitrage = (graceMonths * graceNetCashflow) + (amortMonths * netMonthlyCashflow);
+      const totalArbitrageWan = (totalArbitrage / 10000).toFixed(1);
+      
+      document.getElementById('repTotalArbitrage').textContent = `NT$ ${Math.round(totalArbitrage).toLocaleString()} (${totalArbitrageWan} 萬)`;
+      document.getElementById('repArbitrageAmount').textContent = `NT$ ${totalArbitrageWan} 萬元`;
+
+      const postMortgageMonthlyNet = totalMonthlyIncome - pledgeMonthlyInterest;
+      document.getElementById('repPostMortgageMonthly').textContent = `+ NT$ ${postMortgageMonthlyNet.toLocaleString()} /月`;
+    }
+
+    // 自動讀取每日 12:00 自動產生的配息率 JSON
+    async function fetchDailyRates() {
+      try {
+        const res = await fetch('./fund_rates.json');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data && data.funds) {
+          if (data.funds.fund1) {
+            document.getElementById('card_nav1').textContent = `$${data.funds.fund1.nav}`;
+            document.getElementById('card_div1').textContent = `$${data.funds.fund1.dividend}`;
+            document.getElementById('card_yield1').textContent = `${data.funds.fund1.annual_yield}%`;
+            document.getElementById('t1_yield1').value = data.funds.fund1.annual_yield;
+          }
+          if (data.funds.fund2) {
+            document.getElementById('card_nav2').textContent = `$${data.funds.fund2.nav}`;
+            document.getElementById('card_div2').textContent = `$${data.funds.fund2.dividend}`;
+            document.getElementById('card_yield2').textContent = `${data.funds.fund2.annual_yield}%`;
+            document.getElementById('t1_yield2').value = data.funds.fund2.annual_yield;
+          }
+          if (data.funds.fund3) {
+            document.getElementById('card_nav3').textContent = `$${data.funds.fund3.nav}`;
+            document.getElementById('card_div3').textContent = `$${data.funds.fund3.dividend}`;
+            document.getElementById('card_yield3').textContent = `${data.funds.fund3.annual_yield}%`;
+            document.getElementById('t1_yield3').value = data.funds.fund3.annual_yield;
+          }
+          if (data.updated_at) {
+            document.getElementById('updateTimeText').textContent = data.updated_at;
+          }
+          calculate();
+        }
+      } catch (e) {
+        console.log('讀取線上配息率備援預設值');
+      }
+    }
+
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', calculate);
+      input.addEventListener('change', calculate);
+    });
+
+    // 啟動
+    calculate();
+    fetchDailyRates();
+  </script>
+</body>
+</html>
