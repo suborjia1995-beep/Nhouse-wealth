@@ -791,7 +791,7 @@
     // 自動讀取每日 12:00 自動產生的配息率 JSON
     async function fetchDailyRates() {
       try {
-        const res = await fetch('./fund_rates.json');
+        const res = await fetch('./fund_rates.json?t=' + new Date().getTime());
         if (!res.ok) return;
         const data = await res.json();
         if (data && data.funds) {
