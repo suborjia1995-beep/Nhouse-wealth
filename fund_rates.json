@@ -1,30 +1,23 @@
 {
-  "updated_at": "2026-08-30 12:00:00 (CST)",
-  "source": "MoneyDJ 理財網 / 境外基金觀測站",
+  "updated_at": "2026-08-31 09:58:41 UTC",
   "funds": {
     "fund1": {
       "name": "安聯收益成長基金-AM穩定月收類股(美元)",
-      "code": "TLZ64-0428",
-      "nav": 8.5854,
-      "dividend": 0.0538,
-      "annual_yield": 7.52,
-      "description": "美股成長股+非投等債+可轉債"
+      "nav": null,
+      "dividend": null,
+      "annual_yield": 0.0
     },
     "fund2": {
       "name": "瀚亞多重收益優化組合基金B類型(美元)",
-      "code": "FLZ36-E962",
-      "nav": 8.44,
-      "dividend": 0.07,
-      "annual_yield": 9.95,
-      "description": "多元收益優化組合"
+      "nav": null,
+      "dividend": null,
+      "annual_yield": 0.0
     },
     "fund3": {
       "name": "聯博-美國成長基金AP(總報酬月配)級別美元",
-      "code": "ALBT8-13C4",
-      "nav": 73.48,
-      "dividend": 0.8322,
-      "annual_yield": 13.59,
-      "description": "美國大型成長股+總報酬月配"
+      "nav": null,
+      "dividend": null,
+      "annual_yield": 0.0
     }
   }
 }
